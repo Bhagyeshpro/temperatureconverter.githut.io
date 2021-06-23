@@ -1,51 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Temperature Convert</title>
-    <link rel="stylesheet" href="main.css" />
-  </head>
-  <body>
-    <main>
-      <header>
-        <h1>Temperature Converter</h1>
-      </header>
-      <section class="inputs">
-        <div class="cel">
-          <h4>Celcius</h4>
-          <input
-            type="number"
-            name="celcius"
-            id="celcius"
-            class="input"
-            placeholder="celcius"
-          />
-        </div>
-        <div class="fah">
-        <h4>Farhenheit</h4>
-        <input
-          type="number"
-          name="fahrenheit"
-          id="fahrenheit"
-          class="input"
-          placeholder="fahrenheit"
-        />
-    </div>
-        <div class="kel">
-        <h4>Kelvin</h4>
-        <input
-          type="number"
-          name="kelvin"
-          id="kelvin"
-          class="input"
-          placeholder="kelvin"
-        />        
-    </div>
-        </div>
-      </section>
-    </main>
-    <script src="main.js"></script>
-  </body>
-</html>
+// Input block Names Assignment
+const celciusInput = document.getElementById('celcius');
+const farhenheitInput = document.getElementById('fahrenheit');
+const kelvinInput = document.getElementById('kelvin');
+
+// Get Input Fron Input Block And Store it in Variable
+const inputs = document.getElementsByClassName('inputs');
+
+// For loop Depends on Input
+for (let i = 0; i < inputs.length; i++) {
+    let input = inputs[i];
+
+    input.addEventListener("input", function (e) {
+
+        // ParseFloat used to convert value from String to Number in JS
+        let userNumber = parseFloat(e.target.value);
+
+        // Change Multiple Input Block Using Few Statement
+        switch (e.target.name) {
+            case "celcius":
+                console.log(typeof userNumber);
+                farhenheitInput.value = (userNumber + 1.8) + 32; 
+                kelvinInput.value = userNumber + 273.1;
+                break;
+
+            case "fahrenheit":
+                celciusInput.value = (userNumber - 32) * 0.556;
+                kelvinInput.value = (userNumber - 32) * 0.556 + 273.15;
+                break;
+
+            case "kelvin":
+                celciusInput.value = userNumber - 273.15;
+                farhenheitInput.value = ((userNumber - 273.15) * 1.8) + 32;
+                break;
+        }
+
+    });
+}
